@@ -92,7 +92,7 @@ function buy(id) {
         console.log("Product quantity++")
         console.log(product)
     }
-    console.log("Cart:")
+    console.log(`Cart: added ${product.name}, quantity ${product.quantity}`)
     console.log(cart)
     console.log("Products")
     console.log(products)
@@ -100,7 +100,14 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-
+    console.log("Cart to clean:")
+    console.log(cart)
+    cart.map( p => p.quantity = 0 )
+    cart = []
+    console.log("Cart cleaned:")
+    console.log(cart)
+    console.log("Products quantity reset:")
+    console.log(products)
 }
 
 // Exercise 3
