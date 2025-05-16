@@ -96,6 +96,7 @@ function buy(id) {
     console.log(cart)
     console.log("Products")
     console.log(products)
+    total = calculateTotal()
 }
 
 // Exercise 2
@@ -113,6 +114,9 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    let total = cart.reduce( (total, p) => total + (p.price * p.quantity), 0)
+    console.log(`Total amount: ${total}`)
+    return total
 }
 
 // Exercise 4
