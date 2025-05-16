@@ -77,7 +77,25 @@ var total = 0;
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
+    console.log("Buy Item")
+    let product = products.find( p => p.id == id);
+    console.log(product)
     // 2. Add found product to the cart array
+    let product2 = cart.find( p => p.id == id)
+    if(!product2){
+        product.quantity = 1;
+        console.log("Product quantity = 1")
+        console.log(product)
+        cart.push(product)
+    }else{
+        product.quantity++;
+        console.log("Product quantity++")
+        console.log(product)
+    }
+    console.log("Cart:")
+    console.log(cart)
+    console.log("Products")
+    console.log(products)
 }
 
 // Exercise 2
