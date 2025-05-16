@@ -116,12 +116,22 @@ function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
     let total = cart.reduce( (total, p) => total + (p.price * p.quantity), 0)
     console.log(`Total amount: ${total}`)
+    applyPromotionsCart()
     return total
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    cart.forEach( (p) =>{
+        if(p.offer){
+            if(p.offer.number <= p.quantity){
+                p.subtotalWithDiscount = (p.price * p.quantity) * (1 - p.offer.percent/100)
+                console.log(`Offer:`)
+                console.log(p)
+            }
+        }
+    })
 }
 
 // Exercise 5
