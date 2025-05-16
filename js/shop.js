@@ -114,9 +114,14 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
-    let total = cart.reduce( (total, p) => total + (p.price * p.quantity), 0)
-    console.log(`Total amount: ${total}`)
     applyPromotionsCart()
+    let total = cart.reduce( (total, p) => {
+        if(p.subtotalWithDiscount)
+            return total + p.subtotalWithDiscount
+        return total + (p.price * p.quantity)
+    }, 0)
+    console.log(`Total amount: ${total}`)
+    printCart()
     return total
 }
 
@@ -137,6 +142,15 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    /*  <tr>
+            <th scope="row">Cooking oil</th>
+            <td>$10.5</td>
+            <td>2</td>
+            <td>$21</td>
+        </tr>*/
+    //document.getElementById("cart_list").innerHTML=""
+    const cartList = document.getElementById("cart_list")
+    cartList.innerHTML =""
 }
 
 
