@@ -1,9 +1,9 @@
 # IT S2.2 E-commerce
 
-## 🗂️ Tabla de contenidos
+## 🗂️Tabla de contenidos
 
 - [IT S2.2 E-commerce](#it-s22-e-commerce)
-  - [🗂️ Tabla de contenidos](#️-tabla-de-contenidos)
+  - [🗂️Tabla de contenidos](#️tabla-de-contenidos)
   - [📄Descripción](#descripción)
   - [💻Tecnologías Utilitzadas](#tecnologías-utilitzadas)
   - [📋Requisitos](#requisitos)
