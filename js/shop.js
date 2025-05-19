@@ -112,6 +112,8 @@ function cleanCart() {
     console.log("Products quantity reset:")
     console.log(products)
     printCart();
+    countProduct=document.getElementById("count_product")
+    countProduct.innerHTML = 0
 }
 
 // Exercise 3
