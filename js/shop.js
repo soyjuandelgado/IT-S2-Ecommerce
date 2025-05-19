@@ -96,6 +96,8 @@ function buy(id) {
     console.log(cart)
     console.log("Products")
     console.log(products)
+    countProduct=document.getElementById("count_product")
+    countProduct.innerHTML = parseInt(countProduct.innerHTML) + 1 
 }
 
 // Exercise 2
