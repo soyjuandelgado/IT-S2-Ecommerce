@@ -96,19 +96,20 @@ function buy(id) {
     console.log(cart)
     console.log("Products")
     console.log(products)
-    total = calculateTotal()
 }
 
 // Exercise 2
 function cleanCart() {
     console.log("Cart to clean:")
     console.log(cart)
-    cart.map( p => p.quantity = 0 )
+    cart.map( p => delete p.quantity )
+    cart.map( p => delete p.subtotalWithDiscount )
     cart = []
     console.log("Cart cleaned:")
     console.log(cart)
     console.log("Products quantity reset:")
     console.log(products)
+    printCart();
 }
 
 // Exercise 3
@@ -121,7 +122,6 @@ function calculateTotal() {
         return total + (p.price * p.quantity)
     }, 0)
     console.log(`Total amount: ${total}`)
-    printCart()
     return total
 }
 
@@ -131,7 +131,7 @@ function applyPromotionsCart() {
     cart.forEach( (p) =>{
         if(p.offer){
             if(p.offer.number <= p.quantity){
-                p.subtotalWithDiscount = (p.price * p.quantity) * (1 - p.offer.percent/100)
+                p.subtotalWithDiscount = Math.round((p.price * p.quantity) * (1 - p.offer.percent/100) *100)/100
                 console.log(`Offer:`)
                 console.log(p)
             }
@@ -142,15 +142,20 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    /*  <tr>
-            <th scope="row">Cooking oil</th>
-            <td>$10.5</td>
-            <td>2</td>
-            <td>$21</td>
-        </tr>*/
-    //document.getElementById("cart_list").innerHTML=""
+    let total = calculateTotal()
     const cartList = document.getElementById("cart_list")
     cartList.innerHTML =""
+    cart.forEach(p => {
+        text = `<tr>
+            <th scope="row">${p.name}</th>
+            <td>$${p.price}</td>
+            <td>${p.quantity}</td>
+            <td>$${p.subtotalWithDiscount? p.subtotalWithDiscount: p.price * p.quantity}</td>
+        </tr>`
+        cartList.innerHTML += text
+    });
+    const totalPrice = document.getElementById("total_price")
+    totalPrice.innerHTML = total
 }
 
 
