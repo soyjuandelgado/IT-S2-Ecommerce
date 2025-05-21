@@ -1,6 +1,6 @@
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
+/*(function () {
 	'use strict'
 
 	// Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -19,7 +19,7 @@
 		}, false)
 	})
 })()
-
+*/
 // Exercise 6
 function validate() {
 	let error = 0;
@@ -39,9 +39,11 @@ function validate() {
 	// Validate fields entered by the user: name, phone, password, and email
 	if(containsNumber(fName.value)){
 		fName.classList.add("is-invalid")
+		fName.setCustumValidity("Name must not contain numbers.")
 		errorName.innerHTML="The field must not contain numbers."
 	}
 	else{
+		fName.classList.remove("is-invalid")
 		errorName.innerHTML="This field is required and must have, at least, 3 characters"
 	}
 	if(containsNumber(fLastN.value)){
