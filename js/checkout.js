@@ -60,7 +60,7 @@ function validate() {
 		else
 			input.classList.remove("is-invalid");
 
-		//validForm = validInput && validForm;
+		validForm = validInput && validForm;
 	});
 
 	
@@ -115,7 +115,6 @@ function validate() {
 	//form.classList.add("was-validated")
 	//event.preventDefault()
 	
-	return false;
 	return validForm;
 }
 
@@ -190,22 +189,10 @@ function validLength(value, min, max = 1000){
 	return valid;
 }
 
-function containsNumber(value){
-	return /\d/.test(value);
-}
+const containsNumber = (value) => /\d/.test(value);
 
-function onlyNumbers(value){
-	return /^\d+$/.test(value);
-}
+const onlyNumbers = (value) => /^\d+$/.test(value);
 
-function containsLetter(value){
-	return /[A-Za-z]/.test(value);
-}
+const checkEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-function checkEmail(value){
-	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-function checkPassword(value){
-	return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/.test(value);
-}
+const checkPassword = (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/.test(value);
