@@ -78,7 +78,7 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     console.log("Buy Item")
-    let product = products.find( p => p.id == id);
+    let product = products.find( p => p.id == id)
     console.log(product)
     // 2. Add found product to the cart array
     let product2 = cart.find( p => p.id == id)
@@ -96,8 +96,16 @@ function buy(id) {
     console.log(cart)
     console.log("Products")
     console.log(products)
-    countProduct=document.getElementById("count_product")
-    countProduct.innerHTML = parseInt(countProduct.innerHTML) + 1 
+    modifyCountProduct(1)
+}
+
+function modifyCountProduct(value)
+{
+    let countProduct=document.getElementById("count_product");
+    if(value != 0)
+        value = parseInt(countProduct.innerHTML) + value;
+
+    countProduct.innerHTML = value;
 }
 
 function buyCart(id){
@@ -117,8 +125,7 @@ function cleanCart() {
     console.log("Products quantity reset:")
     console.log(products)
     printCart();
-    countProduct=document.getElementById("count_product")
-    countProduct.innerHTML = 0
+    modifyCountProduct(0);
 }
 
 // Exercise 3
