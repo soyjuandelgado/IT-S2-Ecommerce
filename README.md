@@ -14,13 +14,32 @@
 
 ## 📄Descripción
 
-Página web responsive con visualización en web y móvil.
+Página web de venta de productos.
+
+Partiendo del modelo dado, se han realizado las siguientes funcionalidades:
+
+- Añadir producto al carrito.
+- Vaciar carrito.
+- Calcular precio total.
+- Aplicar promociones.
+- Mostrar carrito.
+- Comprobar validez de los campos en el formulario checkout.
+- Eliminar productos del carrito.
+- Añadir imagenes de productos a la web.
 
 ## 💻Tecnologías Utilitzadas
 
+- HTML
+- Javascript
+- Bootstrap
+  
 ## 📋Requisitos
 
+Navegador web.
+
 ## 🛠️Instalación
+
+No es necesaria.
 
 ## ▶️Ejecución
 
