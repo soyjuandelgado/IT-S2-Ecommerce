@@ -100,6 +100,11 @@ function buy(id) {
     countProduct.innerHTML = parseInt(countProduct.innerHTML) + 1 
 }
 
+function buyCart(id){
+    buy(id);
+    printCart();
+}
+
 // Exercise 2
 function cleanCart() {
     console.log("Cart to clean:")
@@ -132,16 +137,31 @@ function calculateTotal() {
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
-    cart.forEach( (p) =>{
+    cart.forEach( (p) => {
         if(p.offer){
             if(p.offer.number <= p.quantity){
                 p.subtotalWithDiscount = Math.round((p.price * p.quantity) * (1 - p.offer.percent/100) *100)/100
                 console.log(`Offer:`)
                 console.log(p)
+            } else {
+                delete p.subtotalWithDiscount;
             }
         }
     })
 }
+
+/* const applyPromotionProduct = (product) => {
+    if(product.offer){
+        if(product.offer.number <= product.quantity){
+            product.subtotalWithDiscount = Math.round((product.price * product.quantity) * (1 - product.offer.percent/100) *100)/100
+            console.log(`Offer:`)
+            console.log(p)
+        } else {
+            delete product.subtotalWithDiscount;
+        }
+    }
+}
+ */
 
 // Exercise 5
 function printCart() {
@@ -154,7 +174,13 @@ function printCart() {
             <th scope="row">${p.name}</th>
             <td>$${p.price}</td>
             <td>${p.quantity}</td>
-            <td>$${p.subtotalWithDiscount? p.subtotalWithDiscount: p.price * p.quantity}</td>
+            <td class="d-flex justify-content-between">
+                <span>$${p.subtotalWithDiscount? p.subtotalWithDiscount: p.price * p.quantity}</span>
+                <div class="ms-auto">
+                    <button class="btn btn-sm btn-outline-primary" onclick="buyCart(${p.id})">+</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${p.id})">-</button>
+                </div>
+            </td>
         </tr>`
         cartList.innerHTML += text
     });
@@ -167,7 +193,17 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
-
+    let product = cart.find( p => p.id == id);
+    if(product){
+        product.quantity--;
+        if(product.quantity<=0){
+            let index = cart.indexOf(product);
+            if(index >= 0)
+                cart.splice(index, 1);
+        }
+        console.log(`Cart: removed ${product.name}, quantity ${product.quantity}`)
+    }
+    printCart();
 }
 
 function open_modal() {
