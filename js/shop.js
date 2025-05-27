@@ -77,27 +77,115 @@ var total = 0;
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
+    let product = products.find( p => p.id == id)
     // 2. Add found product to the cart array
+    let product2 = cart.find( p => p.id == id)
+    if(!product2){
+        product.quantity = 1;
+        console.log(product)
+        cart.push(product)
+    }else{
+        product.quantity++;
+        console.log(product)
+    }
+    console.log(`Cart: added ${product.name}, quantity ${product.quantity}`)
+    modifyCountProduct(1)
+}
+
+function modifyCountProduct(value)
+{
+    let countProduct=document.getElementById("count_product");
+    if(value != 0)
+        value = parseInt(countProduct.innerHTML) + value;
+
+    countProduct.innerHTML = value;
+}
+
+function buyCart(id){
+    buy(id);
+    printCart();
 }
 
 // Exercise 2
 function cleanCart() {
-
+    console.log("Cart to clean:")
+    console.log(cart)
+    cart.map( p => delete p.quantity )
+    cart.map( p => delete p.subtotalWithDiscount )
+    cart = []
+    console.log("Cart cleaned:")
+    console.log(cart)
+    console.log("Products quantity reset:")
+    console.log(products)
+    printCart();
+    modifyCountProduct(0);
 }
 
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    applyPromotionsCart()
+    let total = cart.reduce( (total, p) => {
+        if(p.subtotalWithDiscount)
+            return total + p.subtotalWithDiscount
+        return total + (p.price * p.quantity)
+    }, 0)
+    console.log(`Total amount: ${total}`)
+    return total
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    cart.forEach( (p) => {
+        if(p.offer){
+            if(p.offer.number <= p.quantity){
+                p.subtotalWithDiscount = Math.round((p.price * p.quantity) * (1 - p.offer.percent/100) *100)/100
+                console.log(`Offer:`)
+                console.log(p)
+            } else {
+                delete p.subtotalWithDiscount;
+            }
+        }
+    })
 }
+
+/* const applyPromotionProduct = (product) => {
+    if(product.offer){
+        if(product.offer.number <= product.quantity){
+            product.subtotalWithDiscount = Math.round((product.price * product.quantity) * (1 - product.offer.percent/100) *100)/100
+            console.log(`Offer:`)
+            console.log(p)
+        } else {
+            delete product.subtotalWithDiscount;
+        }
+    }
+}
+ */
 
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    let total = calculateTotal()
+    const cartList = document.getElementById("cart_list")
+    cartList.innerHTML =""
+    cart.forEach(p => {
+        text = `<tr>
+            <th scope="row">${p.name}</th>
+            <td>$${p.price}</td>
+            <td>${p.quantity}</td>
+            <td class="d-flex justify-content-between">
+                <span>$${p.subtotalWithDiscount? p.subtotalWithDiscount: p.price * p.quantity}</span>
+                <div class="ms-auto">
+                    <button class="btn btn-sm btn-outline-primary" onclick="buyCart(${p.id})">+</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${p.id})">-</button>
+                </div>
+            </td>
+        </tr>`
+        cartList.innerHTML += text
+    });
+    const totalPrice = document.getElementById("total_price")
+    totalPrice.innerHTML = total
 }
 
 
@@ -105,7 +193,17 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
-
+    let product = cart.find( p => p.id == id);
+    if(product){
+        product.quantity--;
+        if(product.quantity<=0){
+            let index = cart.indexOf(product);
+            if(index >= 0)
+                cart.splice(index, 1);
+        }
+        console.log(`Cart: removed ${product.name}, quantity ${product.quantity}`)
+    }
+    printCart();
 }
 
 function open_modal() {
