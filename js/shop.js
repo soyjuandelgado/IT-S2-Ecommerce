@@ -205,6 +205,7 @@ function removeFromCart(id) {
         console.log(`Cart: removed ${product.name}, quantity ${product.quantity}`)
     }
     printCart();
+    modifyCountProduct(-1)
 }
 
 function open_modal() {
