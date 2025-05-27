@@ -1,69 +1,3 @@
-// If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-var products = [
-    {
-        id: 1,
-        name: 'cooking oil',
-        price: 10.5,
-        type: 'grocery',
-        offer: {
-            number: 3,
-            percent: 20
-        }
-    },
-    {
-        id: 2,
-        name: 'Pasta',
-        price: 6.25,
-        type: 'grocery'
-    },
-    {
-        id: 3,
-        name: 'Instant cupcake mixture',
-        price: 5,
-        type: 'grocery',
-        offer: {
-            number: 10,
-            percent: 30
-        }
-    },
-    {
-        id: 4,
-        name: 'All-in-one',
-        price: 260,
-        type: 'beauty'
-    },
-    {
-        id: 5,
-        name: 'Zero Make-up Kit',
-        price: 20.5,
-        type: 'beauty'
-    },
-    {
-        id: 6,
-        name: 'Lip Tints',
-        price: 12.75,
-        type: 'beauty'
-    },
-    {
-        id: 7,
-        name: 'Lawn Dress',
-        price: 15,
-        type: 'clothes'
-    },
-    {
-        id: 8,
-        name: 'Lawn-Chiffon Combo',
-        price: 19.99,
-        type: 'clothes'
-    },
-    {
-        id: 9,
-        name: 'Toddler Frock',
-        price: 9.99,
-        type: 'clothes'
-    }
-]
-
 // => Reminder, it's extremely important that you debug your code. 
 // ** It will save you a lot of time and frustration!
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
@@ -77,18 +11,15 @@ var total = 0;
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    let product = products.find( p => p.id == id)
+    let product = products.find( p => p.id === id)
     // 2. Add found product to the cart array
-    let product2 = cart.find( p => p.id == id)
+    let product2 = cart.find( p => p.id === id)
     if(!product2){
         product.quantity = 1;
-        console.log(product)
         cart.push(product)
     }else{
         product.quantity++;
-        console.log(product)
     }
-    console.log(`Cart: added ${product.name}, quantity ${product.quantity}`)
     modifyCountProduct(1)
 }
 
@@ -108,15 +39,9 @@ function buyCart(id){
 
 // Exercise 2
 function cleanCart() {
-    console.log("Cart to clean:")
-    console.log(cart)
     cart.map( p => delete p.quantity )
     cart.map( p => delete p.subtotalWithDiscount )
     cart = []
-    console.log("Cart cleaned:")
-    console.log(cart)
-    console.log("Products quantity reset:")
-    console.log(products)
     printCart();
     modifyCountProduct(0);
 }
@@ -130,7 +55,7 @@ function calculateTotal() {
             return total + p.subtotalWithDiscount
         return total + (p.price * p.quantity)
     }, 0)
-    console.log(`Total amount: ${total}`)
+    total = Math.round(total * 100) / 100;
     return total
 }
 
@@ -141,27 +66,12 @@ function applyPromotionsCart() {
         if(p.offer){
             if(p.offer.number <= p.quantity){
                 p.subtotalWithDiscount = Math.round((p.price * p.quantity) * (1 - p.offer.percent/100) *100)/100
-                console.log(`Offer:`)
-                console.log(p)
             } else {
                 delete p.subtotalWithDiscount;
             }
         }
     })
 }
-
-/* const applyPromotionProduct = (product) => {
-    if(product.offer){
-        if(product.offer.number <= product.quantity){
-            product.subtotalWithDiscount = Math.round((product.price * product.quantity) * (1 - product.offer.percent/100) *100)/100
-            console.log(`Offer:`)
-            console.log(p)
-        } else {
-            delete product.subtotalWithDiscount;
-        }
-    }
-}
- */
 
 // Exercise 5
 function printCart() {
@@ -201,9 +111,9 @@ function removeFromCart(id) {
             if(index >= 0)
                 cart.splice(index, 1);
         }
-        console.log(`Cart: removed ${product.name}, quantity ${product.quantity}`)
     }
     printCart();
+    modifyCountProduct(-1)
 }
 
 function open_modal() {
