@@ -130,6 +130,7 @@ function calculateTotal() {
             return total + p.subtotalWithDiscount
         return total + (p.price * p.quantity)
     }, 0)
+    total = Math.round(total * 100) / 100;
     console.log(`Total amount: ${total}`)
     return total
 }
