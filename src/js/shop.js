@@ -82,13 +82,10 @@ function buy(id) {
     let product2 = cart.find( p => p.id === id)
     if(!product2){
         product.quantity = 1;
-        console.log(product)
         cart.push(product)
     }else{
         product.quantity++;
-        console.log(product)
     }
-    console.log(`Cart: added ${product.name}, quantity ${product.quantity}`)
     modifyCountProduct(1)
 }
 
@@ -108,15 +105,9 @@ function buyCart(id){
 
 // Exercise 2
 function cleanCart() {
-    console.log("Cart to clean:")
-    console.log(cart)
     cart.map( p => delete p.quantity )
     cart.map( p => delete p.subtotalWithDiscount )
     cart = []
-    console.log("Cart cleaned:")
-    console.log(cart)
-    console.log("Products quantity reset:")
-    console.log(products)
     printCart();
     modifyCountProduct(0);
 }
@@ -131,7 +122,6 @@ function calculateTotal() {
         return total + (p.price * p.quantity)
     }, 0)
     total = Math.round(total * 100) / 100;
-    console.log(`Total amount: ${total}`)
     return total
 }
 
@@ -142,27 +132,12 @@ function applyPromotionsCart() {
         if(p.offer){
             if(p.offer.number <= p.quantity){
                 p.subtotalWithDiscount = Math.round((p.price * p.quantity) * (1 - p.offer.percent/100) *100)/100
-                console.log(`Offer:`)
-                console.log(p)
             } else {
                 delete p.subtotalWithDiscount;
             }
         }
     })
 }
-
-/* const applyPromotionProduct = (product) => {
-    if(product.offer){
-        if(product.offer.number <= product.quantity){
-            product.subtotalWithDiscount = Math.round((product.price * product.quantity) * (1 - product.offer.percent/100) *100)/100
-            console.log(`Offer:`)
-            console.log(p)
-        } else {
-            delete product.subtotalWithDiscount;
-        }
-    }
-}
- */
 
 // Exercise 5
 function printCart() {
@@ -202,7 +177,6 @@ function removeFromCart(id) {
             if(index >= 0)
                 cart.splice(index, 1);
         }
-        console.log(`Cart: removed ${product.name}, quantity ${product.quantity}`)
     }
     printCart();
     modifyCountProduct(-1)

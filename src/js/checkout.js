@@ -10,7 +10,6 @@ function validate() {
 		let validInput = true;
 		
 		input.value = input.value.trim();
-		console.log(`${input.id} = '${input.value}'`);
 		switch (input.id) {
 			case "fName": 
 			case "fLastN":
@@ -31,7 +30,6 @@ function validate() {
 			default:
 				break;
 		}
-		console.log(`input.id valid ='${validInput}'`);
 		
 		if(!validInput)
 			input.classList.add("is-invalid");
